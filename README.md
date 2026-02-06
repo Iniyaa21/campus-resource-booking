@@ -32,6 +32,7 @@ This system provides a reliable way to book resources without overlaps.
 
 ## High-Level Design
 This system focuses on correctness under concurrent booking requests.
+![ERdiagram](assets/ER.png)
 
 ## Tech Stack (Tentative)
 - Frontend: ReactJS
