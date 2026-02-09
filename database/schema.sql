@@ -1,6 +1,9 @@
 -- USERS
+-- Enable pgcrypto for UUID generation
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
 CREATE TABLE users (
-    user_id SERIAL PRIMARY KEY,
+    user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     role TEXT CHECK (role IN ('student','admin')),
@@ -9,7 +12,7 @@ CREATE TABLE users (
 
 -- RESOURCES
 CREATE TABLE resources (
-    resource_id SERIAL PRIMARY KEY,
+    resource_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name TEXT NOT NULL,
     resource_type TEXT,
     capacity INT,
@@ -18,9 +21,9 @@ CREATE TABLE resources (
 
 -- BOOKINGS (CRITICAL TABLE)
 CREATE TABLE bookings (
-    booking_id SERIAL PRIMARY KEY,
-    resource_id INT REFERENCES resources(resource_id),
-    user_id INT REFERENCES users(user_id),
+    booking_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    resource_id UUID REFERENCES resources(resource_id),
+    user_id UUID REFERENCES users(user_id),
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     booking_status TEXT CHECK (
@@ -32,8 +35,8 @@ CREATE TABLE bookings (
 
 -- NOTIFICATIONS
 CREATE TABLE notifications (
-    notification_id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(user_id),
+    notification_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID REFERENCES users(user_id),
     message TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     read BOOLEAN DEFAULT FALSE
