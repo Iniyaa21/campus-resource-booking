@@ -1,39 +1,40 @@
--- USERS TABLE
+-- USERS
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    role VARCHAR(20) CHECK (role IN ('student', 'incharge', 'admin')),
+    user_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    role TEXT CHECK (role IN ('student','admin')),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- RESOURCES TABLE
+-- RESOURCES
 CREATE TABLE resources (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    type VARCHAR(50),
+    resource_id SERIAL PRIMARY KEY,
+    name TEXT NOT NULL,
+    resource_type TEXT,
     capacity INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- BOOKINGS TABLE
+-- BOOKINGS (CRITICAL TABLE)
 CREATE TABLE bookings (
-    id SERIAL PRIMARY KEY,
-    resource_id INT REFERENCES resources(id),
-    user_id INT REFERENCES users(id),
+    booking_id SERIAL PRIMARY KEY,
+    resource_id INT REFERENCES resources(resource_id),
+    user_id INT REFERENCES users(user_id),
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
-    status VARCHAR(20) CHECK (
-        status IN ('pending', 'approved', 'rejected', 'cancelled')
+    booking_status TEXT CHECK (
+        booking_status IN ('CONFIRMED','CANCELLED')
     ),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CHECK (start_time < end_time)
 );
 
--- APPROVALS TABLE
-CREATE TABLE approvals (
-    id SERIAL PRIMARY KEY,
-    booking_id INT REFERENCES bookings(id),
-    approved_by INT REFERENCES users(id),
-    decision VARCHAR(20),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+-- NOTIFICATIONS
+CREATE TABLE notifications (
+    notification_id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(user_id),
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    read BOOLEAN DEFAULT FALSE
 );
