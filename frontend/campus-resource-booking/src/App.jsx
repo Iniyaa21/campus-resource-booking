@@ -9,6 +9,7 @@ import BookingCreation from './pages/BookingCreation';
 import MyBookings from './pages/MyBookings';
 import NotificationsPanel from './pages/NotificationsPanel';
 import './App.css';
+//Checking changes
 
 function App() {
   return (
