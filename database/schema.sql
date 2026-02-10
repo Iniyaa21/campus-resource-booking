@@ -32,8 +32,8 @@ CREATE TABLE bookings (
     start_time TIMESTAMP NOT NULL,
     end_time TIMESTAMP NOT NULL,
     booking_status TEXT CHECK (
-        booking_status IN ('CONFIRMED','CANCELLED')
-    ) DEFAULT 'CONFIRMED',
+        booking_status IN ('PENDING','APPROVED','REJECTED','CANCELLED')
+) DEFAULT 'PENDING',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CHECK (start_time < end_time)
 );
