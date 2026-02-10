@@ -33,9 +33,10 @@ CREATE TABLE bookings (
     end_time TIMESTAMP NOT NULL,
     booking_status TEXT CHECK (
         booking_status IN ('PENDING','APPROVED','REJECTED','CANCELLED')
-) DEFAULT 'PENDING',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CHECK (start_time < end_time)
+    ) DEFAULT 'PENDING',
+    approved_by UUID REFERENCES users(user_id),
+    approved_at TIMESTAMP,
+    rejection_reason TEXT,
 );
 
 -- Prevent overlap
@@ -44,7 +45,7 @@ EXCLUDE USING gist (
     resource_id WITH =,
     tstzrange(start_time, end_time) WITH &&
 )
-WHERE (booking_status = 'CONFIRMED');
+WHERE (booking_status = 'APPROVED');
 
 -- NOTIFICATIONS
 CREATE TABLE notifications (
