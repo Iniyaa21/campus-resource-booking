@@ -6,7 +6,7 @@ function Layout() {
       <nav style={{ padding: '1rem', background: '#f0f0f0', marginBottom: '1rem' }}>
         <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
         <Link to="/history" style={{ marginRight: '1rem' }}>History</Link>
-        <Link to="/search">Search</Link>
+        <Link to="/view-resources">View Resources</Link>
       </nav>
       <main>
         <Outlet />

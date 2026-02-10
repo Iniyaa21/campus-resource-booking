@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Landing from './pages/Landing';
 import History from './pages/History';
-import Search from './pages/Search';
+import Search from './pages/ViewResources';
 import ResourceList from './pages/ResourceList';
 import AvailabilityView from './pages/AvailabilityView';
 import BookingCreation from './pages/BookingCreation';
@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Landing />} />
           <Route path="history" element={<History />} />
-          <Route path="search" element={<Search />} />
+          <Route path="view-resources" element={<Search />} />
         </Route>
         <Route path="/resources" element={<ResourceList />} />
         <Route path="/availability" element={<AvailabilityView />} />
