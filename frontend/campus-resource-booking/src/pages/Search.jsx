@@ -1,11 +1,11 @@
-function Search() {
+function ViewResources() {
   return (
     <div>
-      <h1>Search Resources</h1>
+      <h1>View Resources</h1>
       <p>No resources available</p>
     </div>
   );
 }
 
-export default Search;
+export default ViewResources;
 
