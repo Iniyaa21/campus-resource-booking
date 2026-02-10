@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Landing from './pages/Landing';
 import History from './pages/History';
-import Search from './pages/Search';
+import Search from './pages/ViewResources';
 import ResourceList from './pages/ResourceList';
 import AvailabilityView from './pages/AvailabilityView';
 import BookingCreation from './pages/BookingCreation';
