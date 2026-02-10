@@ -10,6 +10,7 @@ import MyBookings from './pages/MyBookings';
 import NotificationsPanel from './pages/NotificationsPanel';
 import './App.css';
 
+
 function App() {
   return (
     <Router>
