@@ -3,7 +3,7 @@
 ## Definition
 
 Two bookings are considered to be in conflict if they overlap in time
-for the **same resource**.
+for the same resource.
 
 A conflict occurs when an existing confirmed booking intersects with
 the requested booking time range.
@@ -20,15 +20,15 @@ This condition detects any time overlap between two intervals.
 
 ## Status rules
 
-Only bookings with status **'CONFIRMED'** are considered during
+Only bookings with status 'CONFIRMED' are considered during
 conflict detection.
 
-Bookings marked as **'CANCELLED'** are ignored because they no longer
+Bookings marked as 'CANCELLED' are ignored because they no longer
 reserve the resource.
 
 ## Concurrency safety
 
-Conflict detection must be executed **inside a database transaction**
+Conflict detection must be executed inside a database transaction
 to prevent race conditions when multiple users attempt to book the same
 resource at the same time.
 
@@ -40,5 +40,5 @@ The booking creation flow is:
 4. If no conflict → insert booking
 5. Commit transaction
 
-This ensures **strong consistency** and guarantees that a resource
+This ensures strong consistency and guarantees that a resource
 cannot be double-booked.
